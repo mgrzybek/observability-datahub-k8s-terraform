@@ -30,6 +30,10 @@ If their value is *audit*, then the message is routed to the *auditlogs* topic.
 
 Each pod is a terraform-based module:
 
-* [logs-splitter-logstash](./logs-splitter-logstash/)
-* [ocp-s3-bucket](./ocp-s3-bucket/)
+* [logs-splitter-logstash](https://github.com/mgrzybek/terraform-module-k8s-logstash-logs-splitter)
+* [k8s-bucket-claim](https://github.com/mgrzybek/terraform-module-k8s-bucket-claim)
 * logs-to-s3: *in progress*
+
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
