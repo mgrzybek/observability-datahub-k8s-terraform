@@ -13,6 +13,11 @@ variable "kafka_data_size" {
   type        = string
   default     = "1Gi"
   description = "Size of the PV claimed to store Kafka’s data"
+
+  validation {
+    condition     = regex("[[:digit:]]+[[:alpha:]]+", var.kafka_data_size) == var.kafka_data_size
+    error_message = "The value has to be a number followed by a unit"
+  }
 }
 
 variable "kafka_replicas" {
@@ -26,9 +31,10 @@ variable "zk_data_size" {
   default     = "1Gi"
   description = "Size of the PV claimed to store Zookeeper’s data"
 
-  #  validation {
-  #    condition = regex
-  #  }
+  validation {
+    condition     = regex("[[:digit:]]+[[:alpha:]]+", var.zk_data_size) == var.zk_data_size
+    error_message = "The value has to be a number followed by a unit"
+  }
 }
 
 variable "zk_replicas" {
