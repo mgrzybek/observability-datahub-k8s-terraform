@@ -19,3 +19,8 @@ plan.out: .terraform ## Create the plan
 apply: plan.out ## Apply the plan
 	terraform apply ./plan.out
 	rm -f plan.out
+
+
+.PHONY: destroy
+destroy: ## Destroy the deployment
+	terraform destroy -var-file values.tfvars
