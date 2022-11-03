@@ -13,7 +13,7 @@ help: ## This help message
 init: .terraform ## Initialize the environment
 
 plan.out: .terraform ## Create the plan
-	terraform plan -var namespace=kafka-logs -out plan.out
+	terraform plan -var-file values.tfvars -out plan.out
 
 .PHONY: apply
 apply: plan.out ## Apply the plan
