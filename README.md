@@ -28,11 +28,13 @@ If their value is *audit*, then the message is routed to the *auditlogs* topic.
 ```
 ## How to use it
 
-Each pod is a terraform-based module:
+Each resource is a terraform-based module:
 
-* [logs-splitter-logstash](https://github.com/mgrzybek/terraform-module-k8s-logstash-logs-splitter)
-* [k8s-bucket-claim](https://github.com/mgrzybek/terraform-module-k8s-bucket-claim)
-* logs-to-s3: *in progress*
+* [logs-splitter-logstash](https://github.com/mgrzybek/terraform-module-k8s-logstash-logs-splitter): deploys a logstash service that splits the logs.
+* [k8s-bucket-claim](https://github.com/mgrzybek/terraform-module-k8s-bucket-claim): creates s3 buckets using the Openshift storage operator.
+* [strimzi-operator](./strimzi-operator): installs the Strimzi Kafka operator using the Openshift marketpace (Operator Subscription).
+* [strimzi-cluster](./strimzi-claster): installs a Kafka cluster using the operator just installed before.
+* logs-to-s3: *in progress*, will be based on a Fluentd agent using Kafka and S3 modules. We need to create a custom container because this is not included in the official release. See https://github.com/mgrzybek/fluentd-kafka-s3-logs-archiver
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
