@@ -12,7 +12,7 @@ module "techlogs" {
   source     = "git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim"
 
   namespace = var.namespace
-  name      = "techlogs"
+  name      = var.techlogs_bucket
 }
 
 module "auditlogs" {
@@ -20,7 +20,7 @@ module "auditlogs" {
   source     = "git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim"
 
   namespace = var.namespace
-  name      = "auditlogs"
+  name      = var.auditlogs_bucket
 }
 
 module "logs" {
@@ -28,7 +28,9 @@ module "logs" {
   source     = "git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim"
 
   namespace = var.namespace
-  name      = "logs"
+
+  for_each = toset(var.source_topics)
+  name     = each.key
 }
 
 module "operator" {
@@ -57,10 +59,10 @@ module "splitter" {
 
   name      = "splitter"
   namespace = var.namespace
-  number    = 1
+  number    = var.splitter_replicas
 
-  bootstrap_servers       = "kafka-logs-kafka-bootstrap:9091"
-  destination_audit_topic = "auditlogs"
-  destination_tech_topic  = "techlogs"
-  source_topics           = ["logs"]
+  bootstrap_servers       = "${var.kafka_cluster_name}-kafka-bootstrap:9091"
+  destination_audit_topic = var.auditlogs_topic
+  destination_tech_topic  = var.techlogs_topic
+  source_topics           = var.source_topics
 }

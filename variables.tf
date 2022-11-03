@@ -42,3 +42,43 @@ variable "zk_replicas" {
   default     = 1
   description = "Number of pods deployed for Zookeeper"
 }
+
+variable "source_topics" {
+  type        = list(string)
+  default     = ["logs"]
+  description = "Names of the topics to listen to"
+}
+
+variable "auditlogs_topic" {
+  type        = string
+  default     = "audit"
+  description = "Target Kafka topic to push audit logs"
+}
+
+variable "techlogs_topic" {
+  type        = string
+  default     = "techlogs"
+  description = "Target Kafka topic to push technical logs"
+}
+
+variable "auditlogs_bucket" {
+  type        = string
+  default     = "auditlogs"
+  description = "Name of the bucket to create to store the audit logs"
+}
+
+variable "techlogs_bucket" {
+  type        = string
+  default     = "techlogs"
+  description = "Name oh the bucket to create to store the technical logs"
+}
+
+variable "splitter_replicas" {
+  type        = number
+  default     = 1
+  description = "Number of replicas to deploy"
+
+  validation {
+    condition = var.splitter_replicas > 0
+  }
+}
