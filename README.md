@@ -68,12 +68,12 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_kafka_cluster_name"></a> [kafka\_cluster\_name](#input\_kafka\_cluster\_name) | n/a | `string` | `"kafka-logs"` | no |
-| <a name="input_kafka_data_size"></a> [kafka\_data\_size](#input\_kafka\_data\_size) | n/a | `string` | `"1Gi"` | no |
-| <a name="input_kafka_replicas"></a> [kafka\_replicas](#input\_kafka\_replicas) | n/a | `number` | `1` | no |
+| <a name="input_kafka_cluster_name"></a> [kafka\_cluster\_name](#input\_kafka\_cluster\_name) | Name of the cluster created | `string` | `"kafka-logs"` | no |
+| <a name="input_kafka_data_size"></a> [kafka\_data\_size](#input\_kafka\_data\_size) | Size of the PV claimed to store Kafka’s data | `string` | `"1Gi"` | no |
+| <a name="input_kafka_replicas"></a> [kafka\_replicas](#input\_kafka\_replicas) | Number of data nodes deployed | `number` | `1` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace used to deploy the module | `string` | n/a | yes |
-| <a name="input_zk_data_size"></a> [zk\_data\_size](#input\_zk\_data\_size) | n/a | `string` | `"1Gi"` | no |
-| <a name="input_zk_replicas"></a> [zk\_replicas](#input\_zk\_replicas) | n/a | `number` | `1` | no |
+| <a name="input_zk_data_size"></a> [zk\_data\_size](#input\_zk\_data\_size) | Size of the PV claimed to store Zookeeper’s data | `string` | `"1Gi"` | no |
+| <a name="input_zk_replicas"></a> [zk\_replicas](#input\_zk\_replicas) | Number of pods deployed for Zookeeper | `number` | `1` | no |
 
 ## Outputs
 
