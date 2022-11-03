@@ -46,3 +46,21 @@ module "cluster" {
   namespace          = var.namespace
 }
 
+module "splitter" {
+  depends_on = [
+    module.techlogs,
+    module.auditlogs,
+    module.logs,
+    module.cluster
+  ]
+  source = "git::https://github.com/mgrzybek/terraform-module-k8s-logstash-logs-splitter"
+
+  name      = "splitter"
+  namespace = var.namespace
+  number    = 1
+
+  bootstrap_servers       = "kafka-logs-kafka-bootstrap:9091"
+  destination_audit_topic = "auditlogs"
+  destination_tech_topic  = "techlogs"
+  source_topics           = ["logs"]
+}
