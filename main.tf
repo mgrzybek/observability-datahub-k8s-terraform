@@ -1,16 +1,14 @@
 resource "kubernetes_namespace" "logs" {
   metadata {
     annotations = {
-      metadata = {
-        name = var.namespace
-      }
+      name = var.namespace
     }
     name = var.namespace
   }
 }
 
 module "techlogs" {
-  depends_on = [kubernetes_namespace_logs]
+  depends_on = [kubernetes_namespace.logs]
   source     = "git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim"
 
   namespace = var.namespace
@@ -18,7 +16,7 @@ module "techlogs" {
 }
 
 module "auditlogs" {
-  depends_on = [kubernetes_namespace_logs]
+  depends_on = [kubernetes_namespace.logs]
   source     = "git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim"
 
   namespace = var.namespace
@@ -26,9 +24,10 @@ module "auditlogs" {
 }
 
 module "logs" {
-  depends_on = [kubernetes_namespace_logs]
+  depends_on = [kubernetes_namespace.logs]
   source     = "git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim"
 
   namespace = var.namespace
   name      = "logs"
 }
+
