@@ -79,6 +79,7 @@ variable "splitter_replicas" {
   description = "Number of replicas to deploy"
 
   validation {
-    condition = var.splitter_replicas > 0
+    condition     = var.splitter_replicas > 0
+    error_message = "The given value must be greater than 0"
   }
 }
