@@ -31,3 +31,18 @@ module "logs" {
   name      = "logs"
 }
 
+module "operator" {
+  source = "./strimzi-operator"
+
+}
+
+module "cluster" {
+  depends_on = [kubernetes_namespace.logs]
+  source     = "./strimzi-cluster"
+
+  kafka_cluster_name = var.kafka_cluster_name
+  kafka_replicas     = var.kafka_replicas
+  zk_replicas        = var.zk_replicas
+  namespace          = var.namespace
+}
+
