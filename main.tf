@@ -36,6 +36,10 @@ module "logs" {
 module "operator" {
   source = "./strimzi-operator"
 
+  isOpenshift     = true
+  operatorSource  = "community-operator"
+  sourceNamespace = "openshift-marketplace"
+  startingCSV     = "strimzi-cluster-operator.v0.31.1"
 }
 
 module "cluster" {
