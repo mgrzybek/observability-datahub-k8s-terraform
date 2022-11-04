@@ -31,8 +31,8 @@ If their value is *audit*, then the message is routed to the *auditlogs* topic.
 Each resource is a terraform-based module:
 
 * [logs-splitter-logstash](https://github.com/mgrzybek/terraform-module-k8s-logstash-logs-splitter): deploys a logstash service that splits the logs.
-* [k8s-bucket-claim](https://github.com/mgrzybek/terraform-module-k8s-bucket-claim): creates s3 buckets using the Openshift storage operator.
-* [strimzi-operator](./strimzi-operator): installs the Strimzi Kafka operator using the Openshift marketpace (Operator Subscription).
+* [k8s-bucket-claim](https://github.com/mgrzybek/terraform-module-k8s-bucket-claim): creates s3 buckets using an ObjectBucketClaim.
+* [strimzi-operator](./strimzi-operator): installs the Strimzi Kafka operator using the Openshift marketpace or OperatorHub.io on Kubernetes (Operator Subscription).
 * [strimzi-cluster](./strimzi-claster): installs a Kafka cluster using the operator just installed before.
 * logs-to-s3: *in progress*, will be based on a Fluentd agent using Kafka and S3 modules. We need to create a custom container because this is not included in the official release. See https://github.com/mgrzybek/fluentd-kafka-s3-logs-archiver
 
@@ -70,12 +70,18 @@ No requirements.
 |------|-------------|------|---------|:--------:|
 | <a name="input_auditlogs_bucket"></a> [auditlogs\_bucket](#input\_auditlogs\_bucket) | Name of the bucket to create to store the audit logs | `string` | `"auditlogs"` | no |
 | <a name="input_auditlogs_topic"></a> [auditlogs\_topic](#input\_auditlogs\_topic) | Target Kafka topic to push audit logs | `string` | `"audit"` | no |
+| <a name="input_channel"></a> [channel](#input\_channel) | Channel used to download the operator | `string` | `"stable"` | no |
+| <a name="input_isOpenshift"></a> [isOpenshift](#input\_isOpenshift) | Is it deployed on Openshift? | `bool` | `false` | no |
 | <a name="input_kafka_cluster_name"></a> [kafka\_cluster\_name](#input\_kafka\_cluster\_name) | Name of the cluster created | `string` | `"kafka-logs"` | no |
 | <a name="input_kafka_data_size"></a> [kafka\_data\_size](#input\_kafka\_data\_size) | Size of the PV claimed to store Kafka’s data | `string` | `"1Gi"` | no |
 | <a name="input_kafka_replicas"></a> [kafka\_replicas](#input\_kafka\_replicas) | Number of data nodes deployed | `number` | `1` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace used to deploy the module | `string` | n/a | yes |
+| <a name="input_operatorSource"></a> [operatorSource](#input\_operatorSource) | n/a | `string` | `"operatorhubio-catalog"` | no |
+| <a name="input_sourceNamespace"></a> [sourceNamespace](#input\_sourceNamespace) | Marketplace used to download the operator | `string` | `"olm"` | no |
 | <a name="input_source_topics"></a> [source\_topics](#input\_source\_topics) | Names of the topics to listen to | `list(string)` | <pre>[<br>  "logs"<br>]</pre> | no |
 | <a name="input_splitter_replicas"></a> [splitter\_replicas](#input\_splitter\_replicas) | Number of replicas to deploy | `number` | `1` | no |
+| <a name="input_startingCSV"></a> [startingCSV](#input\_startingCSV) | Version to install | `string` | `"strimzi-cluster-operator.v0.31.1"` | no |
+| <a name="input_storage_class"></a> [storage\_class](#input\_storage\_class) | Storage class to use in the ObjectBucketClaim | `string` | n/a | yes |
 | <a name="input_techlogs_bucket"></a> [techlogs\_bucket](#input\_techlogs\_bucket) | Name oh the bucket to create to store the technical logs | `string` | `"techlogs"` | no |
 | <a name="input_techlogs_topic"></a> [techlogs\_topic](#input\_techlogs\_topic) | Target Kafka topic to push technical logs | `string` | `"techlogs"` | no |
 | <a name="input_zk_data_size"></a> [zk\_data\_size](#input\_zk\_data\_size) | Size of the PV claimed to store Zookeeper’s data | `string` | `"1Gi"` | no |

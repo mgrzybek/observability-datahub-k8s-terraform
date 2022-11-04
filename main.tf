@@ -11,23 +11,26 @@ module "techlogs" {
   depends_on = [kubernetes_namespace.logs]
   source     = "git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim"
 
-  namespace = var.namespace
-  name      = var.techlogs_bucket
+  namespace    = var.namespace
+  storageClass = var.storage_class
+  name         = var.techlogs_bucket
 }
 
 module "auditlogs" {
   depends_on = [kubernetes_namespace.logs]
   source     = "git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim"
 
-  namespace = var.namespace
-  name      = var.auditlogs_bucket
+  namespace    = var.namespace
+  storageClass = var.storage_class
+  name         = var.auditlogs_bucket
 }
 
 module "logs" {
   depends_on = [kubernetes_namespace.logs]
   source     = "git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim"
 
-  namespace = var.namespace
+  namespace    = var.namespace
+  storageClass = var.storage_class
 
   for_each = toset(var.source_topics)
   name     = each.key
@@ -36,10 +39,10 @@ module "logs" {
 module "operator" {
   source = "./strimzi-operator"
 
-  isOpenshift     = true
-  operatorSource  = "community-operator"
-  sourceNamespace = "openshift-marketplace"
-  startingCSV     = "strimzi-cluster-operator.v0.31.1"
+  isOpenshift     = var.isOpenshift
+  operatorSource  = var.operatorSource
+  sourceNamespace = var.sourceNamespace
+  startingCSV     = var.startingCSV
 }
 
 module "cluster" {

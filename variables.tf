@@ -73,6 +73,11 @@ variable "techlogs_bucket" {
   description = "Name oh the bucket to create to store the technical logs"
 }
 
+variable "storage_class" {
+  type        = string
+  description = "Storage class to use in the ObjectBucketClaim"
+}
+
 variable "splitter_replicas" {
   type        = number
   default     = 1
@@ -82,4 +87,28 @@ variable "splitter_replicas" {
     condition     = var.splitter_replicas > 0
     error_message = "The given value must be greater than 0"
   }
+}
+variable "channel" {
+  default     = "stable"
+  description = "Channel used to download the operator"
+}
+
+variable "operatorSource" {
+  default = "operatorhubio-catalog"
+}
+
+variable "sourceNamespace" {
+  default     = "olm"
+  description = "Marketplace used to download the operator"
+}
+
+variable "startingCSV" {
+  default     = "strimzi-cluster-operator.v0.31.1"
+  description = "Version to install"
+}
+
+variable "isOpenshift" {
+  type        = bool
+  default     = false
+  description = "Is it deployed on Openshift?"
 }
