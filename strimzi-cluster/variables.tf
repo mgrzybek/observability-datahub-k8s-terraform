@@ -1,9 +1,11 @@
 variable "kafka_cluster_name" {
-  type = string
+  type        = string
+  description = "Name of the cluster to deploy"
 }
 
 variable "namespace" {
-  type = string
+  type        = string
+  description = "Namespace used to deploy the cluster"
 }
 
 variable "default_replication_factor" {
@@ -13,8 +15,9 @@ variable "default_replication_factor" {
 }
 
 variable "inter_broker_protocol_version" {
-  type    = string
-  default = "3.2"
+  type        = string
+  default     = "3.2"
+  description = "Kafka protocol used for inter-broker communication"
 }
 
 variable "min_insync_replicas" {
@@ -42,8 +45,9 @@ variable "transaction_state_log_replication_factor" {
 }
 
 variable "kafka_replicas" {
-  type    = number
-  default = 1
+  type        = number
+  default     = 1
+  description = "Number of data nodes to deploy"
 
   validation {
     condition     = var.kafka_replicas > 0
@@ -57,8 +61,9 @@ variable "kafka_version" {
 }
 
 variable "zk_replicas" {
-  type    = number
-  default = 1
+  type        = number
+  default     = 1
+  description = "Number of Zookeeper instances to deploy"
 
   validation {
     condition     = var.zk_replicas == 1 || (var.zk_replicas > 0 && var.zk_replicas / 2 != ceil(var.zk_replicas / 2))
