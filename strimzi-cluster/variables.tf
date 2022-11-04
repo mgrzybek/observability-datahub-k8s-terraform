@@ -56,8 +56,9 @@ variable "kafka_replicas" {
 }
 
 variable "kafka_version" {
-  type    = string
-  default = "3.2.3"
+  type        = string
+  default     = "3.2.3"
+  description = "Kafka version to deploy"
 }
 
 variable "zk_replicas" {
