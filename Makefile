@@ -20,7 +20,14 @@ apply: plan.out ## Apply the plan
 	terraform apply ./plan.out
 	rm -f plan.out
 
-
 .PHONY: destroy
 destroy: ## Destroy the deployment
 	terraform destroy -var-file values.tfvars
+
+.PHONY: show
+show: ## Prints the resources
+	@terraform show
+
+.PHONY: show-modules
+show-modules: ## Prints the modules
+	@terraform show | awk '/# module/ {gsub(":","");print $$2}'
