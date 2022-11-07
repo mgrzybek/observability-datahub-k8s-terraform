@@ -25,17 +25,6 @@ module "auditlogs" {
   name         = var.auditlogs_bucket
 }
 
-module "logs" {
-  depends_on = [kubernetes_namespace.logs]
-  source     = "git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim"
-
-  namespace    = var.namespace
-  storageClass = var.storage_class
-
-  for_each = toset(var.source_topics)
-  name     = each.key
-}
-
 module "operator" {
   source = "./strimzi-operator"
 

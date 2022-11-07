@@ -83,7 +83,6 @@ No requirements.
 |------|--------|---------|
 | <a name="module_auditlogs"></a> [auditlogs](#module\_auditlogs) | git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim | n/a |
 | <a name="module_cluster"></a> [cluster](#module\_cluster) | ./strimzi-cluster | n/a |
-| <a name="module_logs"></a> [logs](#module\_logs) | git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim | n/a |
 | <a name="module_operator"></a> [operator](#module\_operator) | ./strimzi-operator | n/a |
 | <a name="module_splitter"></a> [splitter](#module\_splitter) | git::https://github.com/mgrzybek/terraform-module-k8s-logstash-logs-splitter | n/a |
 | <a name="module_techlogs"></a> [techlogs](#module\_techlogs) | git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim | n/a |
