@@ -68,7 +68,7 @@ module "splitter" {
   namespace = var.namespace
   number    = var.splitter_replicas
 
-  bootstrap_servers       = "${var.kafka_cluster_name}-kafka-bootstrap:9091"
+  bootstrap_servers       = "${var.kafka_cluster_name}-kafka-bootstrap:9092"
   destination_audit_topic = var.auditlogs_topic
   destination_tech_topic  = var.techlogs_topic
   source_topics           = var.source_topics
