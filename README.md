@@ -36,6 +36,36 @@ Each resource is a terraform-based module:
 * [strimzi-cluster](./strimzi-claster): installs a Kafka cluster using the operator just installed before.
 * logs-to-s3: *in progress*, will be based on a Fluentd agent using Kafka and S3 modules. We need to create a custom container because this is not included in the official release. See https://github.com/mgrzybek/fluentd-kafka-s3-logs-archiver
 
+The provided Makefile can be used. You must create a Terraform variables file called `values.tfvars`.
+
+For example:
+```bash
+$ cat values.tfvars
+namespace          = "obs-datahub"
+kafka_cluster_name = "datahub"
+zk_replicas        = 3
+
+source_topics = ["logs"]
+
+storage_class = "openshift-storage.noobaa.io"
+
+isOpenshift     = true
+operatorSource  = "community-operator"
+sourceNamespace = "openshift-marketplace"
+startingCSV     = "strimzi-cluster-operator.v0.31.1"
+
+$ make help
+apply                Apply the plan
+destroy              Destroy the deployment
+help                 This help message
+init                 Initialize the environment
+plan.out             Create the plan
+show-modules         Prints the modules
+show                 Prints the resources
+$ make apply
+[…]
+```
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
