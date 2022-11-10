@@ -81,11 +81,13 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_auditlogs"></a> [auditlogs](#module\_auditlogs) | git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim | n/a |
+| <a name="module_auditlogs_bucket"></a> [auditlogs\_bucket](#module\_auditlogs\_bucket) | git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim | n/a |
+| <a name="module_auditlogs_topic"></a> [auditlogs\_topic](#module\_auditlogs\_topic) | git::https://github.com/mgrzybek/terraform-module-strimzi-topic | n/a |
 | <a name="module_cluster"></a> [cluster](#module\_cluster) | ./strimzi-cluster | n/a |
 | <a name="module_operator"></a> [operator](#module\_operator) | ./strimzi-operator | n/a |
 | <a name="module_splitter"></a> [splitter](#module\_splitter) | git::https://github.com/mgrzybek/terraform-module-k8s-logstash-logs-splitter | n/a |
-| <a name="module_techlogs"></a> [techlogs](#module\_techlogs) | git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim | n/a |
+| <a name="module_techlogs_bucket"></a> [techlogs\_bucket](#module\_techlogs\_bucket) | git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim | n/a |
+| <a name="module_techlogs_topic"></a> [techlogs\_topic](#module\_techlogs\_topic) | git::https://github.com/mgrzybek/terraform-module-strimzi-topic | n/a |
 
 ## Resources
 

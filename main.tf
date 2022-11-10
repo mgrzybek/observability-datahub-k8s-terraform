@@ -7,7 +7,7 @@ resource "kubernetes_namespace" "logs" {
   }
 }
 
-module "techlogs" {
+module "techlogs_bucket" {
   depends_on = [kubernetes_namespace.logs]
   source     = "git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim"
 
@@ -16,7 +16,7 @@ module "techlogs" {
   name         = var.techlogs_bucket
 }
 
-module "auditlogs" {
+module "auditlogs_bucket" {
   depends_on = [kubernetes_namespace.logs]
   source     = "git::https://github.com/mgrzybek/terraform-module-k8s-bucket-claim"
 
@@ -44,11 +44,36 @@ module "cluster" {
   namespace          = var.namespace
 }
 
+module "auditlogs_topic" {
+  depends_on = [module.cluster]
+  source     = "git::https://github.com/mgrzybek/terraform-module-strimzi-topic"
+
+  kafka_cluster = var.kafka_cluster_name
+  namespace     = var.namespace
+
+  name       = var.auditlogs_topic
+  replicas   = 1
+  partitions = 1
+}
+
+module "techlogs_topic" {
+  depends_on = [module.cluster]
+  source     = "git::https://github.com/mgrzybek/terraform-module-strimzi-topic"
+
+  kafka_cluster = var.kafka_cluster_name
+  namespace     = var.namespace
+
+  name       = var.techlogs_topic
+  replicas   = 1
+  partitions = 1
+}
+
 module "splitter" {
   depends_on = [
-    module.techlogs,
-    module.auditlogs,
-    module.logs,
+    module.techlogs_bucket,
+    module.auditlogs_bucket,
+    module.auditlogs_topic,
+    module.techlogs_topic,
     module.cluster
   ]
   source = "git::https://github.com/mgrzybek/terraform-module-k8s-logstash-logs-splitter"
