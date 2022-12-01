@@ -13,7 +13,7 @@ variable "sourceNamespace" {
 }
 
 variable "startingCSV" {
-  default     = "strimzi-cluster-operator.v0.31.1"
+  default     = "strimzi-cluster-operator.v0.32.0"
   description = "Version to install"
 }
 
