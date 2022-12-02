@@ -53,7 +53,7 @@ No modules.
 | <a name="input_isOpenshift"></a> [isOpenshift](#input\_isOpenshift) | Is it deployed on Openshift? | `bool` | `false` | no |
 | <a name="input_operatorSource"></a> [operatorSource](#input\_operatorSource) | n/a | `string` | `"operatorhubio-catalog"` | no |
 | <a name="input_sourceNamespace"></a> [sourceNamespace](#input\_sourceNamespace) | Marketplace used to download the operator | `string` | `"olm"` | no |
-| <a name="input_startingCSV"></a> [startingCSV](#input\_startingCSV) | Version to install | `string` | `"strimzi-cluster-operator.v0.31.1"` | no |
+| <a name="input_startingCSV"></a> [startingCSV](#input\_startingCSV) | Version to install | `string` | `"strimzi-cluster-operator.v0.32.0"` | no |
 
 ## Outputs
 
