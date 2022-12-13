@@ -13,7 +13,16 @@ help: ## This help message
 init: .terraform ## Initialize the environment
 
 plan.out: .terraform ## Create the plan
-	terraform plan -var-file values.tfvars -out plan.out
+	@if [ "$(MAKECMDGOALS)" == "operator" ] ; then \
+		echo terraform plan -var-file values.tfvars -out plan.out -target=module.operator ; \
+		terraform plan -var-file values.tfvars -out plan.out -target=module.operator ; \
+	else \
+		echo terraform plan -var-file values.tfvars -out plan.out ; \
+		terraform plan -var-file values.tfvars -out plan.out ; \
+	fi
+
+.PHONY: operator
+operator: plan.out apply ## Creates the required operator
 
 .PHONY: apply
 apply: plan.out ## Apply the plan

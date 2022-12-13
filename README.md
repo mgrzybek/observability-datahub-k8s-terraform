@@ -59,10 +59,11 @@ apply                Apply the plan
 destroy              Destroy the deployment
 help                 This help message
 init                 Initialize the environment
+operator             Creates the required operator
 plan.out             Create the plan
 show-modules         Prints the modules
 show                 Prints the resources
-$ make apply
+$ make operator && make apply
 […]
 ```
 
